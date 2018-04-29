@@ -8,6 +8,7 @@ $(document).ready(
         var dayThree = $("#dayThree");
         var dayFour = $("#dayFour");
         var dayFive = $("#dayFive");
+        var daySix = $("#daySix");
         var proxy = "https://cors-anywhere.herokuapp.com/";
 
 
@@ -29,7 +30,7 @@ $(document).ready(
                     "Cache-Control": "no-cache",
                     "Postman-Token": "88c16bef-1c6f-431b-8b70-779c8b2db0b5"
                 }
-            }
+            };
 
             $.ajax(settings).done(function(response) {
                 var d = new Date(response.currently.time);
@@ -62,23 +63,36 @@ $(document).ready(
 
 
 
-                current.append("<h1>" + response.currently.temperature.toFixed(0) + "°</h1>");
-                current.append('<img id="current_icon">');
-                current.append("<p>" + response.currently.summary + "</p>");
-                dayOne.append("<h1>" + response.daily.data[1].temperatureHigh.toFixed(0) + "°</h1>" + "<p>" + response.daily.data[1].icon + "</p>" + "<span>" + response.daily.data[1].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[1].temperatureMax.toFixed(0) + "°</span>");
-                dayTwo.append("<h1>" + response.daily.data[2].temperatureHigh.toFixed(0) + "°</h1>" + "<p>" + response.daily.data[2].icon + "</p>" + "<span>" + response.daily.data[2].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[2].temperatureMax.toFixed(0) + "°</span>");
-                dayThree.append("<h1>" + response.daily.data[3].temperatureHigh.toFixed(0) + "°</h1>" + "<p>" + response.daily.data[3].icon + "</p>" + "<span>" + response.daily.data[3].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[3].temperatureMax.toFixed(0) + "°</span>");
-                dayFour.append("<h1>" + response.daily.data[4].temperatureHigh.toFixed(0) + "°</h1>" + "<p>" + response.daily.data[4].icon + "</p>" + "<span>" + response.daily.data[4].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[4].temperatureMax.toFixed(0) + "°</span>");
-                dayFive.append("<h1>" + response.daily.data[5].temperatureHigh.toFixed(0) + "°</h1>" + "<p>" + response.daily.data[5].icon + "</p>" + "<span>" + response.daily.data[5].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[5].temperatureMax.toFixed(0) + "°</span>");
-                // console.log(response);
+                current.append("<h1>" + response.currently.temperature.toFixed(0) + "°</h1>"+ "<p class='current_icon'></p>" +"<p>" + response.currently.summary + "</p>");
+                current.append();
+                dayOne.append("<h1>" + response.daily.data[1].temperatureHigh.toFixed(0) + "°</h1>" + "<p id='d1_icon'></p>" + "<span>" + response.daily.data[1].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[1].temperatureMax.toFixed(0) + "°</span>");
+                dayTwo.append("<h1>" + response.daily.data[2].temperatureHigh.toFixed(0) + "°</h1>" + "<p id='d2_icon'></p>" + "<span>" + response.daily.data[2].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[2].temperatureMax.toFixed(0) + "°</span>");
+                dayThree.append("<h1>" + response.daily.data[3].temperatureHigh.toFixed(0) + "°</h1>" + "<p class='icon'>" + response.daily.data[3].icon + "</p>" + "<span>" + response.daily.data[3].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[3].temperatureMax.toFixed(0) + "°</span>");
+                dayFour.append("<h1>" + response.daily.data[4].temperatureHigh.toFixed(0) + "°</h1>" + "<p class='icon'>" + response.daily.data[4].icon + "</p>" + "<span>" + response.daily.data[4].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[4].temperatureMax.toFixed(0) + "°</span>");
+                dayFive.append("<h1>" + response.daily.data[5].temperatureHigh.toFixed(0) + "°</h1>" + "<p class='icon'>" + response.daily.data[5].icon + "</p>" + "<span>" + response.daily.data[5].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[5].temperatureMax.toFixed(0) + "°</span>");
+                daySix.append("<h1>" + response.daily.data[6].temperatureHigh.toFixed(0) + "°</h1>" + "<p class='icon'>" + response.daily.data[6].icon + "</p>" + "<span>" + response.daily.data[6].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[6].temperatureMax.toFixed(0) + "°</span>");
+                console.log(response.daily.icon);
                 // to console.log data shown by API //
-                var clearNight = "https://i.imgur.com/9TgkwZ0.png";
-                if (response.currently.icon == "clear-night") {
-                    $("#current_icon").attr("src", clearNight);
+                var currently_icon = response.currently.icon;
+                var crnt_icon = $(".current_icon");
+                var dayOneIcon = $("#d1_icon");
+                var dayTwoIcon = $("#d2_icon");
+
+                if(currently_icon == "clear-day"){
+                    crnt_icon.append('<i class="wi wi-day-sunny"></i>');
                 }
-                // if(response.daily.data[1].icon == "clear-day"){
-                //     $("dayOneIcon").attr("src",);
-                //    }
+
+                switch(response.daily.data[1].icon){
+                    case 'clear-day':
+                    dayOneIcon.append('<i class="wi wi-day-sunny"></i>');
+                }
+
+                switch(response.daily.data[2].icon){
+                    case 'clear-day':
+                    dayTwoIcon.append('<i class="wi wi-day-sunny"></i>');
+                }
+
+
             });
 
         }

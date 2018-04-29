@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans+Condensed:300,400,500,600,800');
 .zero_ten {
   background-color: #1474c6;
 }
@@ -32,28 +33,28 @@
   background-color: #ed6013;
 }
 body {
-  font-family: "Josefin Slab", sans-serif;
-  color: #ccc;
+  font-family: 'Encode Sans Condensed', sans-serif;
+  color: #313131;
+}
+body i {
+  width: 130px;
+  height: auto;
 }
 h1 {
-  font-weight: 300;
-  text-shadow: 2px 4px 2px;
+  font-weight: 800;
 }
 p {
   font-size: 1.2em;
+  font-weight: 800;
 }
 .panel {
   margin: 2em;
   width: auto;
   border: 2px solid rgba(0, 0, 0, 0.02);
   border-radius: 8px;
-  box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.03);
   height: auto;
   padding: 2em;
   text-align: center;
-}
-.panel #dayOne {
-  margin: 1em;
 }
 #current {
   width: 100%;
