@@ -1,0 +1,63 @@
+.zero_ten {
+  background-color: #1474c6;
+}
+.ten_twenty {
+  background-color: #3c9aeb;
+}
+.twenty_thirty {
+  background-color: #6ab2f0;
+}
+.thirty_forty {
+  background-color: #81bef2;
+}
+.forty_fifty {
+  background-color: #afd6f7;
+}
+.fifty_sixty {
+  background-color: #ddeefb;
+}
+.sixty_seventy {
+  background-color: #e5fbf4;
+}
+.seventy_eighty {
+  background-color: #cff8ea;
+}
+.eighty_ninety {
+  background-color: #f4a071;
+}
+.ninety_hund {
+  background-color: #f18042;
+}
+.hund_plus {
+  background-color: #ed6013;
+}
+body {
+  font-family: "Josefin Slab", sans-serif;
+  color: #ccc;
+}
+h1 {
+  font-weight: 300;
+  text-shadow: 2px 4px 2px;
+}
+p {
+  font-size: 1.2em;
+}
+.panel {
+  margin: 2em;
+  width: auto;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.03);
+  height: auto;
+  padding: 2em;
+  text-align: center;
+}
+.panel #dayOne {
+  margin: 1em;
+}
+#current {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  margin: 2em;
+}
