@@ -33,8 +33,17 @@ $(document).ready(
             };
 
             $.ajax(settings).done(function(response) {
-                var d = new Date(response.currently.time);
-                console.log(d);
+                var utcSeconds = response.currently.time;
+                var d_One = response.daily.data[1].time*1000;
+                var d_Two = response.daily.data[2].time*1000;
+                var d_Three = response.daily.data[3].time*1000;
+                var d_Four = response.daily.data[4].time*1000;
+                var d_Five = response.daily.data[5].time*1000;
+                var d_Six = response.daily.data[6].time*1000;
+                var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+                var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                d.setUTCSeconds(utcSeconds);
+              
                 var crntTmp = response.currently.temperature;
                 var body = $("body");
                 if (crntTmp >= 0 && crntTmp <= 10) {
@@ -63,14 +72,14 @@ $(document).ready(
 
 
 
-                current.append("<h1>" + response.currently.temperature.toFixed(0) + "°</h1>"+ "<p class='current_icon'></p>" +"<p>" + response.currently.summary + "</p>");
+                current.append( "<h3>"+ d.toLocaleDateString("en-US",options) +"</h3>" + "<h1>" + response.currently.temperature.toFixed(0) + "°</h1>"+ "<p class='current_icon'></p>" +"<p>" + response.currently.summary + "</p>"+ "<p>"+ response.minutely.summary +"</p>" + "<p>"+ response.hourly.summary +"</p>" );
                 current.append();
-                dayOne.append("<h1>" + response.daily.data[1].temperatureHigh.toFixed(0) + "°</h1>" + "<p id='d1_icon'></p>" + "<span>" + response.daily.data[1].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[1].temperatureMax.toFixed(0) + "°</span>");
-                dayTwo.append("<h1>" + response.daily.data[2].temperatureHigh.toFixed(0) + "°</h1>" + "<p id='d2_icon'></p>" + "<span>" + response.daily.data[2].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[2].temperatureMax.toFixed(0) + "°</span>");
-                dayThree.append("<h1>" + response.daily.data[3].temperatureHigh.toFixed(0) + "°</h1>" + "<p class='icon'>" + response.daily.data[3].icon + "</p>" + "<span>" + response.daily.data[3].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[3].temperatureMax.toFixed(0) + "°</span>");
-                dayFour.append("<h1>" + response.daily.data[4].temperatureHigh.toFixed(0) + "°</h1>" + "<p class='icon'>" + response.daily.data[4].icon + "</p>" + "<span>" + response.daily.data[4].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[4].temperatureMax.toFixed(0) + "°</span>");
-                dayFive.append("<h1>" + response.daily.data[5].temperatureHigh.toFixed(0) + "°</h1>" + "<p class='icon'>" + response.daily.data[5].icon + "</p>" + "<span>" + response.daily.data[5].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[5].temperatureMax.toFixed(0) + "°</span>");
-                daySix.append("<h1>" + response.daily.data[6].temperatureHigh.toFixed(0) + "°</h1>" + "<p class='icon'>" + response.daily.data[6].icon + "</p>" + "<span>" + response.daily.data[6].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[6].temperatureMax.toFixed(0) + "°</span>");
+                dayOne.append("<p>"+ moment(d_One).format("MMMM DD, YYYY") +"</p>" + "<h1>"+ response.daily.data[1].temperatureHigh.toFixed(0) + "°</h1>" + "<p id='d1_icon'></p>" + "<span>" + response.daily.data[1].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[1].temperatureMax.toFixed(0) + "°</span>");
+                dayTwo.append("<p>"+ moment(d_Two).format("MMMM DD, YYYY") +"</p>" + "<h1>" + response.daily.data[2].temperatureHigh.toFixed(0) + "°</h1>" + "<p id='d2_icon'></p>" + "<span>" + response.daily.data[2].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[2].temperatureMax.toFixed(0) + "°</span>");
+                dayThree.append("<p>"+ moment(d_Three).format("MMMM DD, YYYY") +"</p>" + "<h1>" + response.daily.data[3].temperatureHigh.toFixed(0) + "°</h1>" + "<p class='icon'>" + "<p id='d3_icon'></p>" + "</p>" + "<span>" + response.daily.data[3].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[3].temperatureMax.toFixed(0) + "°</span>");
+                dayFour.append("<p>"+ moment(d_Four).format("MMMM DD, YYYY") +"</p>" + "<h1>" + response.daily.data[4].temperatureHigh.toFixed(0) + "°</h1>" + "<p class='icon'>" + "<p id='d4_icon'></p>" + "</p>" + "<span>" + response.daily.data[4].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[4].temperatureMax.toFixed(0) + "°</span>");
+                dayFive.append("<p>"+ moment(d_Five).format("MMMM DD, YYYY") +"</p>" + "<h1>" + response.daily.data[5].temperatureHigh.toFixed(0) + "°</h1>" + "<p class='icon'>" + "<p id='d5_icon'></p>" + "</p>" + "<span>" + response.daily.data[5].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[5].temperatureMax.toFixed(0) + "°</span>");
+                daySix.append("<p>"+ moment(d_Six).format("MMMM DD, YYYY") +"</p>" + "<h1>" + response.daily.data[6].temperatureHigh.toFixed(0) + "°</h1>" + "<p class='icon'>" + "<p id='d6_icon'></p>" + "</p>" + "<span>" + response.daily.data[6].temperatureMin.toFixed(0) + "° / </span>" + "<span>" + response.daily.data[6].temperatureMax.toFixed(0) + "°</span>");
                 console.log(response.daily.icon);
                 // to console.log data shown by API //
                 var currently_icon = response.currently.icon;
